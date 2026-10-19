@@ -1,4 +1,4 @@
-package com.elena.ejerciciodinero;
+package com.elena.ejerciciocifras;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
