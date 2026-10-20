@@ -1,4 +1,4 @@
-package com.elena.ejercicio11edad;
+package com.elena.ejerciciocifras;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
