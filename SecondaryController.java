@@ -1,4 +1,4 @@
-package com.elena.ejerciciodinero;
+package com.elena.ejerciciogastos;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
