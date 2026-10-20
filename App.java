@@ -1,4 +1,4 @@
-package com.elena.ejerciciocifras;
+package com.elena.ejercicio11edad;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

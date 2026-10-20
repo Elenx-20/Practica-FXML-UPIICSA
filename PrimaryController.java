@@ -1,93 +1,54 @@
-package com.elena.ejerciciocifras;
+package com.elena.ejercicio11edad;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 public class PrimaryController {
 
-    @FXML private TextField txtNumero;
-    @FXML private TextField txtCantidad;
-    @FXML private TextField txtImpares;
-    @FXML private TextField txtPares;
-    @FXML private TextField txtSuma;
-    @FXML private TextField txtMayor;
-    @FXML private TextField txtMenor;
-
-    @FXML private ListView<String> listaDivisores;
-    @FXML private Label lblMensaje;
+    @FXML
+    private TextField txtFecha;
 
     @FXML
-    private void analizar() {
-        try {
-            int numero = Integer.parseInt(txtNumero.getText().trim());
+    private Label lblResultado;
 
-            if (numero <= 0) {
-                lblMensaje.setText("Ingresa un entero positivo.");
+    @FXML
+    private void calcular() {
+        try {
+            DateTimeFormatter formato =
+                    DateTimeFormatter.ofPattern("dd/MM/uuuu");
+
+            LocalDate nacimiento = LocalDate.parse(
+                    txtFecha.getText().trim(), formato);
+
+            LocalDate hoy = LocalDate.now();
+
+            if (nacimiento.isAfter(hoy)) {
+                lblResultado.setText(
+                        "La fecha no puede ser futura.");
                 return;
             }
 
-            String texto = String.valueOf(numero);
-            int sumaImpares = 0;
-            int sumaPares = 0;
-            int sumaTotal = 0;
-            int mayor = 0;
-            int menor = 9;
+            Period edad = Period.between(nacimiento, hoy);
 
-            for (int i = 0; i < texto.length(); i++) {
-                int cifra = Character.getNumericValue(texto.charAt(i));
+            lblResultado.setText(
+                    "Tiene " + edad.getYears()
+                    + " años con " + edad.getMonths()
+                    + " meses.");
 
-                sumaTotal += cifra;
-
-                if (cifra % 2 == 0) {
-                    sumaPares += cifra;
-                } else {
-                    sumaImpares += cifra;
-                }
-
-                if (cifra > mayor) {
-                    mayor = cifra;
-                }
-
-                if (cifra < menor) {
-                    menor = cifra;
-                }
-            }
-
-            txtCantidad.setText(String.valueOf(texto.length()));
-            txtImpares.setText(String.valueOf(sumaImpares));
-            txtPares.setText(String.valueOf(sumaPares));
-            txtSuma.setText(String.valueOf(sumaTotal));
-            txtMayor.setText(String.valueOf(mayor));
-            txtMenor.setText(String.valueOf(menor));
-
-            listaDivisores.getItems().clear();
-
-            for (int i = 1; i <= numero; i++) {
-                if (numero % i == 0) {
-                    listaDivisores.getItems().add(String.valueOf(i));
-                }
-            }
-
-            lblMensaje.setText("Análisis realizado correctamente.");
-
-        } catch (NumberFormatException e) {
-            lblMensaje.setText("Escribe un número entero positivo válido.");
+        } catch (DateTimeParseException e) {
+            lblResultado.setText(
+                    "Escribe la fecha como dd/MM/aaaa.");
         }
     }
 
     @FXML
     private void limpiar() {
-        txtNumero.clear();
-        txtCantidad.clear();
-        txtImpares.clear();
-        txtPares.clear();
-        txtSuma.clear();
-        txtMayor.clear();
-        txtMenor.clear();
-
-        listaDivisores.getItems().clear();
-        lblMensaje.setText("");
+        txtFecha.clear();
+        lblResultado.setText("");
     }
 }
