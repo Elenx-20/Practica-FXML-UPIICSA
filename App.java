@@ -1,4 +1,4 @@
-package com.elena.ejercicio11edad;
+package com.elena.ejerciciodinero;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -36,3 +36,4 @@ public class App extends Application {
     }
 
 }
+
